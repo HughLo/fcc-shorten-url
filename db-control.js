@@ -104,7 +104,6 @@ DBControl.prototype = {
         this.connectToDB(function(err, db) {
             if(err) {
                 callback(err);
-                db.close();
                 return;
             } 
             
