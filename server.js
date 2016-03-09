@@ -44,9 +44,10 @@ app.get('/:shortUrl', function(req, res) {
     
     dbControl.Find({shortenurl: req.params.shortUrl}, function(err, r) {
         if(err) {
+            console.log("err happen " + err.toString());
             res.writeHead(404, {"Content-Type": "application/json"});
             res.end(JSON.stringify({
-                error: err
+                error: err.toString()
             }));
             return;
         }
@@ -54,7 +55,7 @@ app.get('/:shortUrl', function(req, res) {
         if(r === null) {
             res.writeHead(200, {"Content-Type": "application/json"});
             res.end(JSON.stringify({
-                error: new Error("URL not found")
+                error: "URL not found"
             }));
             return;
         }
