@@ -9,13 +9,13 @@ Util.prototype = {
         if(process.env.MONGOLAB_URI) {
             return {
                 connString: process.env.MONGOLAB_URI
-            }
+            };
         } else {
             return {
                 host: "localhost",
                 port: 20202,
                 dbName: "shorten-url"
-            }
+            };
         }
     }  
 };

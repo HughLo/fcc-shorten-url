@@ -7,7 +7,7 @@ var util = Util();
 var app = express();
 var shortApp = express();
 var shortSrv = Shorten();
-shortSrv.DbControl = DBControl(util.MakeDBOption);
+shortSrv.DbControl = DBControl(util.MakeDBOption());
 
 //shorten service
 shortApp.get('/*', function(req, res) {
