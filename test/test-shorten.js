@@ -54,7 +54,12 @@ describe("Test URL Shorten Service", function() {
     
     describe("#ShortenUrl()", function() {
         before(function(done) {
-            var dbControl = DBControl("localhost", 20202, "test-db");
+            var dbControl = DBControl({
+                host: "localhost",
+                port: 20202,
+                dbName: "test-db"
+            });
+            
             dbControl.Clear(function(err, r) {
                 if(err) return done(err);
                 shortSrv.DbControl = dbControl;

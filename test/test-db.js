@@ -2,7 +2,12 @@ var assert = require('assert');
 var DBControl = require('../db-control.js');
 
 describe("Test Database", function() {
-    var dbc = DBControl("localhost", 20202, "test-db");
+    var dbc = DBControl({
+        host: "localhost",
+        port: 20202,
+        dbName: "test-db"
+    });
+    
     var data = [
         
         //http url

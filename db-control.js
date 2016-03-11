@@ -1,11 +1,29 @@
 var mongo = require('mongodb').MongoClient;
+var assert = require('assert');
 
-var DBControl = function (host, port, dbName) {
-    if(!(this instanceof DBControl)) return new DBControl(host, port, dbName);
-    this.host = host || "localhost";
-    this.port = port || 27017;
-    this.dbName = dbName || "shorten-url";
-    this.requestUrl = "mongodb://" + this.host + ":" + this.port + "/" + this.dbName;
+// create a database controller
+// @param options.connString
+// @param options.host
+// @param options.port
+// @param options.dbName
+var DBControl = function(options) {
+    if(!(this instanceof DBControl)) {
+        console.log("create instance");
+        return new DBControl(options);
+    }
+    
+    if(options.hasOwnProperty("connString")) {
+        this.requestUrl = options.connString;
+    } else {
+        assert(options.hasOwnProperty("host"));
+        assert(options.hasOwnProperty("port"));
+        assert(options.hasOwnProperty("dbName"));
+        
+        this.requestUrl = "mongodb://" + options.host + ":" + 
+            options.port + "/" + options.dbName;
+    }
+    
+    console.log(this.requestUrl);
 };
 
 DBControl.prototype = {

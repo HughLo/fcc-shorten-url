@@ -1,5 +1,17 @@
 var assert = require('assert');
 
+/**
+    @fileOverview The **Shorten** class is used to shorten a specified URL
+    
+    @example
+    var shortSrv = Shorten();
+    shortSrv.OriginalUrl = "http://www.example.com";
+    shortSrv.Shorten(function(err, r) {
+        //TODO
+    });
+*/
+
+// create an instance of Shorten.
 var Shorten = function() {
     if(!(this instanceof Shorten)) return new Shorten();
     this.OriginalUrl = ""; 
@@ -11,6 +23,8 @@ Shorten.prototype = {
     base62Volcabulary: "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
     collection: null,
     
+    //return true if this.OriginalUrl is a valid URL.
+    //valid URL has the format "http://www.example.com"
     isValidUrl: function() {
         var urlRegexp = /^http[s]?:\/\/www\.\w+\.\w+(\/\w+)*/;
         var matchResult = urlRegexp.exec(this.OriginalUrl);
@@ -53,6 +67,7 @@ Shorten.prototype = {
         return seqNum;
     },
     
+    // return the shorten form of this.OrignalUrl
     ShortenUrl: function(callback) {
         var self = this;
         

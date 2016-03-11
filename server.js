@@ -6,7 +6,11 @@ var Shorten = require('./shorten.js');
 var app = express();
 var shortApp = express();
 var shortSrv = Shorten();
-var dbControl = DBControl("localhost", 20202, "shorten-url");
+var dbControl = DBControl({
+    host: "localhost",
+    port: 20202,
+    dbName: "shorten-url"
+})
 
 shortSrv.DbControl = dbControl;
 
