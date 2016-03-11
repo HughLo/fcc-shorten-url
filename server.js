@@ -1,18 +1,13 @@
 var express = require('express');
 var DBControl = require('./db-control.js');
 var Shorten = require('./shorten.js');
+var Util = require('./util.js')
 
-
+var util = Util();
 var app = express();
 var shortApp = express();
 var shortSrv = Shorten();
-var dbControl = DBControl(process.env.MONGOLAB_URI || {
-    host: "localhost",
-    port: 20202,
-    dbName: "shorten-url"
-})
-
-shortSrv.DbControl = dbControl;
+shortSrv.DbControl = DBControl(util.MakeDBOption);
 
 //shorten service
 shortApp.get('/*', function(req, res) {
