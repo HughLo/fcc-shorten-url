@@ -1,13 +1,14 @@
 var express = require('express');
 var DBControl = require('./db-control.js');
 var Shorten = require('./shorten.js');
-var Util = require('./util.js')
+var Util = require('./util.js');
 
 var util = Util();
 var app = express();
 var shortApp = express();
 var shortSrv = Shorten();
-shortSrv.DbControl = DBControl(util.MakeDBOption());
+var dbControl = DBControl(util.MakeDBOption());
+shortSrv.DbControl = dbControl;
 
 //shorten service
 shortApp.get('/*', function(req, res) {
@@ -22,9 +23,6 @@ shortApp.get('/*', function(req, res) {
            }));
            return;
        }
-       
-       console.log("protocol: " + req.protocol);
-       console.log("secure: " + req.secure);
        
        res.writeHead(200, {"Content-Type": "application/json"});
        res.end(JSON.stringify({
