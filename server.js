@@ -6,7 +6,7 @@ var Shorten = require('./shorten.js');
 var app = express();
 var shortApp = express();
 var shortSrv = Shorten();
-var dbControl = DBControl({
+var dbControl = DBControl(process.env.MONGOLAB_URI || {
     host: "localhost",
     port: 20202,
     dbName: "shorten-url"
